@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Project - Data Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .decorative-line {
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+            width: 200px;
+            margin: 20px auto;
+        }
+
+        .project-overview {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .project-overview h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .project-overview p {
+            font-size: 1.1rem;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        .features-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .features-section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .tech-stack {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .tech-stack h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .tech-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            background: #e9ecef;
+        }
+
+        .team-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .team-section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-table thead {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .team-table th,
+        .team-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .team-table th {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .team-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .team-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .role-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .timeline-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .timeline-section h3 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .timeline-item {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 4px solid #667eea;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            text-align: center;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-table {
+                font-size: 0.9rem;
+            }
+            
+            .team-table th,
+            .team-table td {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Data Analytics Dashboard Platform</h1>
+            <div class="decorative-line"></div>
+            <p style="font-size: 1.2rem; color: #7f8c8d; margin-top: 15px;">
+                A Comprehensive Business Intelligence Solution
+            </p>
+        </header>
+
+        <div class="project-overview">
+            <h2><span class="icon">📊</span>Project Overview</h2>
+            <p>Our team project involves developing a comprehensive <strong>Data Analytics Dashboard Platform</strong> that combines modern web technologies with powerful data analysis capabilities. This full-stack application will serve businesses by providing real-time insights, interactive visualizations, and automated reporting features.</p>
+            
+            <p>The platform integrates data cleaning processes, advanced analytics, and user-friendly interfaces to transform raw business data into actionable insights. Users will be able to connect multiple data sources, create custom dashboards, and generate automated reports for data-driven decision making.</p>
+            
+            <p>This project demonstrates our expertise in both <strong>frontend web development</strong> and <strong>backend data processing</strong>, showcasing skills in modern frameworks, database management, and business intelligence tools.</p>
+        </div>
+
+        <div class="features-section">
+            <h2>🎯 Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">User Authentication</div>
+                    <div class="feature-desc">Secure login system with role-based access control</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">Interactive Dashboards</div>
+                    <div class="feature-desc">Customizable charts and real-time data visualization</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧹</div>
+                    <div class="feature-title">Data Cleaning Tools</div>
+                    <div class="feature-desc">Automated data preprocessing and quality validation</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Responsive Design</div>
+                    <div class="feature-desc">Mobile-friendly interface for all devices</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">AI-Powered Insights</div>
+                    <div class="feature-desc">Machine learning algorithms for predictive analytics</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Power BI Integration</div>
+                    <div class="feature-desc">Seamless connection with Microsoft Power BI</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <h3>💻 Technology Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-item"><strong>HTML5/CSS3</strong></div>
+                <div class="tech-item"><strong>JavaScript</strong></div>
+                <div class="tech-item"><strong>PHP</strong></div>
+                <div class="tech-item"><strong>MySQL</strong></div>
+                <div class="tech-item"><strong>Python</strong></div>
+                <div class="tech-item"><strong>Power BI</strong></div>
+                <div class="tech-item"><strong>Apache/Tomcat</strong></div>
+                <div class="tech-item"><strong>Bootstrap</strong></div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>👥 Team Members</h2>
+            <table class="team-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Student Number</th>
+                        <th>Role</th>
+                        <th>Expertise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Welcome Molefe</strong></td>
+                        <td>231418396</td>
+                        <td><span class="role-badge">Project Lead & Data Analyst</span></td>
+                        <td>Data Cleaning, Power BI, Excel, Python Analytics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sarah Johnson</strong></td>
+                        <td>231418397</td>
+                        <td><span class="role-badge">Frontend Developer</span></td>
+                        <td>React, JavaScript, UI/UX Design, Bootstrap</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Michael Chen</strong></td>
+                        <td>231418398</td>
+                        <td><span class="role-badge">Backend Developer</span></td>
+                        <td>PHP, Node.js, API Development, Server Management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lisa Rodriguez</strong></td>
+                        <td>231418399</td>
+                        <td><span class="role-badge">Database Administrator</span></td>
+                        <td>MySQL, Database Design, Data Security, Performance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="timeline-section">
+            <h3>📅 Project Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 1-2</div>
+                    <div>Planning & Design</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 3-6</div>
+                    <div>Development Phase</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 7-8</div>
+                    <div>Testing & Integration</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 9-10</div>
+                    <div>Deployment & Documentation</div>
+                </div>
+            </div>
+            
+            <div class="decorative-line" style="margin: 30px auto;"></div>
+            
+            <p style="text-align: center; color: #7f8c8d; font-style: italic;">
+                <strong>Expected Completion:</strong> End of semester<br>
+                <strong>Deployment:</strong> Apache Tomcat with PHP/JSP integration<br>
+                <strong>Target Users:</strong> Small to medium businesses seeking data insights
+            </p>
+        </div>
+
+        <div class="navigation">
+            <a href="231418396.html" class="nav-button">← Back to Portfolio</a>
+            <a href="dynamic.php" class="nav-button">View Dynamic PHP</a>
+            <a href="dynamic.jsp" class="nav-button">View Dynamic JSP</a>
+        </div>
+    </div>
+</body>
+</html>
